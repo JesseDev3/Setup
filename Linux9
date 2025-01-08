@@ -1,0 +1,53 @@
+##    Podman    ##
+sudo dnf update
+sudo dnf install pass
+dnf info container-tools
+sudo dnf install container-tools
+https://podman-desktop.io/downloads/linux
+>AMD64 binary tar.gz>extract>podman-desktop>run
+tar -xvzf podman-desktop-1.15.0.tar.gz -C <./filepath>
+
+
+
+
+------------------------------------------------------------------------------------------------------
+/** PODMAN a better choice??? **/
+##  Docker   ##
+# Setup the repo
+sudo dnf -y install dnf-plugins-core
+sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+
+# Install latest Docker Image
+sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Start Docker Image
+sudo systemctl enable --now containerd
+sudo systemctl enable --now docker
+
+-----------------------------------------------------------------------------------------------
+
+
+
+# Install Helm
+https://github.com/helm/helm/releases
+tar -xvzf helm-v3.17.0-rc.1-linux-amd64.tar.gz -C ./usr/local/bin/helm
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+
+# Install Kubectl
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --client
+
+# Install KVM
+sudo dnf install virt-install virt-viewer
+/** More work **/
+
+sudo dnf update
+sudo dnf install pass
+sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+sudo dnf install gnome-shell-extension-appindicator
+# Download latest rpm package
+https://desktop.docker.com/linux/main/amd64/docker-desktop-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64&_gl=1*1kg34ak*_gcl_au*NDcwNjk5NTgwLjE3MzYzNzQ1NTg.*_ga*MjU0NDkxMTUuMTczNjM3NDU1OQ..*_ga_XJWPQMJYHQ*MTczNjM3NDU1OC4xLjEuMTczNjM3NDY3MS4yNi4wLjA.
+sudo dnf install ./docker-desktop-x86_64-rhel.rpm
+
