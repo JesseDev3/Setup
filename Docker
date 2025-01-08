@@ -1,4 +1,6 @@
 # Ubuntu - Docker Desktop
+>Section 1
+UBUNTU
 
 #Docker desktop runs a vm that requires KVM support
 modprobe kvm
@@ -69,3 +71,20 @@ systemctl --user enable docker-desktop
 
 # Update Docker Desktop
 sudo apt-get install ./docker-desktop-<arch>.deb # Replace <arch> with the architecture of your system
+
+
+
+
+>Section 2
+RHEL
+
+# Setup the repo
+sudo dnf -y install dnf-plugins-core
+sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+
+# Install latest Docker Image
+sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Start Docker Image
+suso systemctl enable --now containerd
+sudo systemctl enable --now docker
