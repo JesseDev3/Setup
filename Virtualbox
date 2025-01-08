@@ -1,21 +1,24 @@
-# Download extension pack
+/** Download extension pack **/
 https://www.virtualbox.org/wiki/Downloads
 
-# Choose download for linux distro
+/** Choose download for linux distro **/
 https://www.virtualbox.org/wiki/Linux_Downloads
 
-# Oracle Linux 7,8,9 can use the Oracle Linux yum ​repository
+/** Oracle Linux 7,8,9 can use the Oracle Linux yum ​repository **/
 yum install oraclelinux-developer-release-*
-# Latest release 7.0.x
+/** Latest release 7.0.x **/
 yum install VirtualBox-7.0
 
-# SHA256 checksum
+/** SHA256 checksum **/
 cd/Downloads
 sha256sum virtualbox-<filepath>
 
 /** Install using preferred method **/
 
-# Create RSA key pair to sign vboxdrv vboxnetflt vboxnetadp
+/** Load kernel module / Configure secure boot **/
+sudo /sbin/vboxconfig
+
+/** Create RSA key pair to sign vboxdrv vboxnetflt vboxnetadp **/
 sudo -i
 # mkdir /root/module-signing
 # cd /root/module-signing
@@ -23,37 +26,32 @@ sudo -i
 [...]
 # chmod 600 MOK.priv
 
-# *ROOT, use MOK util to import public key
+/** *ROOT, use MOK util to import public key **/
 # mokutil --import /root/module-signing/MOK.der
-    Reboot the machine. When the bootloader starts, the MOK manager EFI utility should automatically start. It will ask for parts of the password supplied in step 3. Choose to “Enroll MOK”, then you should see the key imported in step 3. Complete the enrollment steps, then continue with the boot. The Linux kernel will log the keys that are loaded, and you should be able to see your own key with the command: dmesg|grep 'EFI: Loaded cert'
 
-    Using a signing utility shippped with the kernel build files, sign all the VirtualBox modules using the private MOK key generated in step 2. I put this in a small script /root/module-signing/sign-vbox-modules, so it can be easily run when new kernels are installed as part of regular updates:
+/** Reboot the machine. When the bootloader starts, the MOK manager EFI utility should automatically start **/
+dmesg|grep 'EFI: Loaded cert'
 
-    #!/bin/bash
+/** Create script /root/module-signing/sign-vbox-modules **/
+#!/bin/bash
+for modfile in $(dirname $(modinfo -n vboxdrv))/*.ko; do
+echo "Signing $modfile"
+/usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 \
+/root/module-signing/MOK.priv \
+/root/module-signing/MOK.der "$modfile"
+done
 
-    for modfile in $(dirname $(modinfo -n vboxdrv))/*.ko; do
-      echo "Signing $modfile"
-      /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 \
-                                    /root/module-signing/MOK.priv \
-                                    /root/module-signing/MOK.der "$modfile"
-    done
+# chmod 700 /root/module-signing/sign-vbox-modules
+/** Run the script as root. You will need to run the signing script every time a new kernel update is installed, 
+since this will cause a rebuild of the third party VirtualBox modules. Use the script only after the new kernel 
+has been booted, since it relies on modinfo -n and uname -r to tell which kernel version to sign for **/
 
-    And then:
+/** Load vboxdrv module and fire up VirtualBox **/
+# modprobe vboxdrv
 
-    # chmod 700 /root/module-signing/sign-vbox-modules
+/** Test for use to sign other thid party kernel modules **/
 
-    Run the script from step 5 as root. You will need to run the signing script every time a new kernel update is installed, since this will cause a rebuild of the third party VirtualBox modules. Use the script only after the new kernel has been booted, since it relies on modinfo -n and uname -r to tell which kernel version to sign for.
-
-    Load vboxdrv module and fire up VirtualBox:
-
-    # modprobe vboxdrv
-
-The procedure can also be used to sign other third party kernel modules, like the nvidia graphics drivers, if so is required. (I have not tested that myself.)
-
-# Load kernel module / Configure secure boot
-sudo /sbin/vboxconfig
-
-# Can't enumerate usb devices
+/** Can't enumerate usb devices **/
 sudo usermod -a -G vboxusers $USER
 groups $USER
 virtualbox logout
