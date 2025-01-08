@@ -11,7 +11,8 @@ yum install VirtualBox-7.0
 
 /** SHA256 checksum **/
 cd/Downloads
-sha256sum virtualbox-<filepath>
+sha256sum virtualbox-<version-filepath>
+sha256sum virtualbox-<ext-filepath>
 
 /** Install using preferred method **/
 
@@ -45,11 +46,12 @@ done
 /** Run the script as root. You will need to run the signing script every time a new kernel update is installed, 
 since this will cause a rebuild of the third party VirtualBox modules. Use the script only after the new kernel 
 has been booted, since it relies on modinfo -n and uname -r to tell which kernel version to sign for **/
+/** Test for use to sign other thid party kernel modules **/
 
 /** Load vboxdrv module and fire up VirtualBox **/
 # modprobe vboxdrv
-
-/** Test for use to sign other thid party kernel modules **/
+/** Install extension manager **/
+ctr+t>Install
 
 /** Can't enumerate usb devices **/
 sudo usermod -a -G vboxusers $USER
