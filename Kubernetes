@@ -1,6 +1,6 @@
 # K8
 
-# Download latest release
+# Download latest kubectl release
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 # Check the sha256 checksum
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
@@ -26,6 +26,26 @@ helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dash
 
 > Section 2
 RHEL (Linux 7-9)
+
+# Install Helm
+https://github.com/helm/helm/releases
+tar -xvzf helm-v3.17.0-rc.1-linux-amd64.tar.gz -C ./usr/local/bin/helm
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+
+# Install Kubectl
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --client
+
+# Install KVM
+sudo dnf install virt-install virt-viewer
+
+
+
+
+
+
 
 # Configure the Kubernetes Repository (Create .repo file and place in filepath)
 sudo vi /etc/yum.repos.d/kubernetes.repo
