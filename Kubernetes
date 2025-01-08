@@ -20,3 +20,24 @@ sudo snap install helm --classic
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
 # Deploy a Helm Release named "kubernetes-dashboard" using the kubernetes-dashboard chart
 helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard
+
+
+
+
+> Section 2
+RHEL (Linux 7-9)
+
+# Configure the Kubernetes Repository (Create .repo file and place in filepath)
+sudo vi /etc/yum.repos.d/kubernetes.repo
+# Use Insert key
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+# Esc key then type :w to save and exit
+
+sudo yum makecache fast
+sudo yum install kubectl:
