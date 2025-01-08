@@ -4,11 +4,6 @@ https://www.virtualbox.org/wiki/Downloads
 /** Choose download for linux distro **/
 https://www.virtualbox.org/wiki/Linux_Downloads
 
-/** Oracle Linux 7,8,9 can use the Oracle Linux yum ​repository **/
-yum install oraclelinux-developer-release-*
-/** Latest release 7.0.x **/
-yum install VirtualBox-7.0
-
 /** SHA256 checksum **/
 cd/Downloads
 sha256sum virtualbox-<version-filepath>
