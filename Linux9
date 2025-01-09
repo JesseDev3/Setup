@@ -37,6 +37,22 @@ curl -L https://developers.redhat.com/content-gateway/rest/mirror/pub/openshift-
 echo "$(<odo.sha256)  odo" | shasum -a 256 --check
 sudo install -o root -g root -m 0755 odo /usr/local/bin/odo
 
+VS Code KUBERNETES 
+/** 
+CLUSTERS
+
+HELM REPOS
+bitnami
+kubernetes-dashboard
+
+CLOUDS
+Azure
+Red Hat OpenShift
+**/
+
+Now for image pulls so that kubernetes-dashboard can be accessed
+
+
 
 
 
