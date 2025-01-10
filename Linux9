@@ -1,3 +1,14 @@
+##  Create Install Media  ##
+24.10>USB>FAT32
+xorriso-dd-target -with_sudo -list_all
+# Verify storage device is not mounted
+sudo umount /dev/sda1
+# Prompted guide
+xorisso-dd-target -with_sudo -plug_test -DO_WRITE -image_file ./<image.iso>
+
+
+
+
 /** CENTOS **/
 # Check Master pre-req
 sudo su -
