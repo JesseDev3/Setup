@@ -2,7 +2,7 @@
 Go through to install all dependencies/binaries/plugins/set $PATH(s):/ core program installs 
 and document seperate steps - ie: qemu/kvm/and virt manager, /docker/k8s/vs code/, all $PATH:/.bashrc, access dashboards (kubernetes, jupyter labs, strelka) 
 
-ORACLE 24.10>amd
+Ubuntu 24.10>amd
 
 KUBERNETES
 
