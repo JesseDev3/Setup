@@ -139,9 +139,11 @@ mv linux-amd64/helm /usr/local/bin/helm
 
 #Initialize a Helm repo
 helm repo add bitnami https://charts.bitnami.com/bitnami
-# Add kubernetes-dashboard repository
-helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
 # Deploy a Helm Release named "kubernetes-dashboard" using the kubernetes-dashboard chart
 helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard
 /** Now, vscode>kubernetes ext>Helm repos dropdown will display Bitnami and kubernetes-dashboard **/
+# Add kubernetes-dashboard repository
+helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
 
+# Add kubernetes-dashboard to cluster
+helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
