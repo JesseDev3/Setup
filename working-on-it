@@ -141,6 +141,7 @@ https://github.com/helm/helm/releases
 tar -zxvf helm-v3.0.0-linux-amd64.tar.gz
 mv linux-amd64/helm /usr/local/bin/helm
 
+/** commenting out section for better placement **/
 #Initialize a Helm repo
 helm repo add bitnami https://charts.bitnami.com/bitnami
 # Deploy a Helm Release named "kubernetes-dashboard" using the kubernetes-dashboard chart
@@ -149,7 +150,7 @@ helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dash
 # Add kubernetes-dashboard repository
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
 bitnami/
-
+/**                                            **/
 
 
 # BRUHHHH create your cluster-<cluster-name>-config.yml
@@ -178,7 +179,7 @@ kubeadmConfigPatches:
       path: /apiServer/certSANs/-
       value: my-hostname
 
-# Add kubernetes-dashboard to cluster
+# Add dashboards to cluster
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
 # Add Prometheus 
 # Add Grafana
