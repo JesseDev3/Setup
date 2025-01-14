@@ -19,6 +19,7 @@ Getting started!
 modprobe kvm
 modprobe kvm_intel  # Intel processors
 modprobe kvm_amd    # AMD processors
+(qemu/kvm, virsh vmm)
 kvm-ok              # View the diagnostics
 lsmod | grep kvm    # Check if the KVM modules are enabled
 ls -al /dev/kvm     # Check ownership
