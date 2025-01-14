@@ -191,7 +191,7 @@ kubeadmConfigPatches:
 
 # Add dashboards to cluster
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
-# Add Grafana :3000
-# Add Prometheus :9090
-
+# Grafana :3000
+# Prometheus :9090
+# Strelka :9980
 
