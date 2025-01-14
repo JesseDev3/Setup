@@ -86,6 +86,14 @@ systemctl --user enable docker-desktop
 # Update Docker Desktop
 sudo apt-get install ./docker-desktop-<arch>.deb # Replace <arch> with the architecture of your system
 
+docker.withRegistry('https://docker.mycorp.com/') {
+  def myImg = docker.image('myImg')
+  // or docker.build, etc.
+  sh "docker pull --all-tags ${myImg.imageName()}"
+  // runs: docker pull --all-tags docker.mycorp.com/myImg
+}
+
+
 
 KUBERNETES
 
