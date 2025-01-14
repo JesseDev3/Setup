@@ -154,7 +154,7 @@ bitnami/
 /**                                            **/
 
 
-# BRUHHHH create your cluster-<cluster-name>-config.yml
+# create your cluster-<cluster-name>-config.yml
 /** create yaml file (vim/nano or vscode>create new file
 ESPECIALLY handy when trying to create more than one node **/
 
