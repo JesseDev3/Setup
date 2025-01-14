@@ -2,6 +2,10 @@
 Go through to install all dependencies/binaries/plugins/set $PATH(s):/ core program installs 
 and document seperate steps - ie: qemu/kvm/and virt manager, /docker/k8s/vs code/, all $PATH:/.bashrc, access dashboards (kubernetes, jupyter labs, strelka) 
 
+
+
+
+
 Ubuntu 24.10>amd
 
 
@@ -144,6 +148,38 @@ helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dash
 /** Now, vscode>kubernetes ext>Helm repos dropdown will display Bitnami and kubernetes-dashboard **/
 # Add kubernetes-dashboard repository
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+bitnami/
+
+
+
+# BRUHHHH create your cluster-<cluster-name>-config.yml
+/** create yaml file (vim/nano or vscode>create new file **/
+
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+  - role: worker
+  - role: worker
+  - role: worker
+
+kubeadmConfigPatches:
+- |
+  apiVersion: kubelet.config.k8s.io/v1beta1
+  kind: KubeletConfiguration
+  evictionHard:
+    nodefs.available: "0%"
+
+  group: kubeadm.k8s.io
+  version: v1beta3
+  kind: ClusterConfiguration
+  patch: |
+    - op: add
+      path: /apiServer/certSANs/-
+      value: my-hostname
 
 # Add kubernetes-dashboard to cluster
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+# Add Prometheus 
+# Add Grafana
+# Add Jira
