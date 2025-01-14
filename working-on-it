@@ -86,6 +86,7 @@ systemctl --user enable docker-desktop
 # Update Docker Desktop
 sudo apt-get install ./docker-desktop-<arch>.deb # Replace <arch> with the architecture of your system
 
+# Docker pipeline plugin
 docker.withRegistry('https://docker.mycorp.com/') {
   def myImg = docker.image('myImg')
   // or docker.build, etc.
