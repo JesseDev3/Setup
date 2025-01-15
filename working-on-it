@@ -1,21 +1,30 @@
-# Goal
-Go through to install all dependencies/binaries/plugins/set $PATH(s):/ core program installs 
-and document seperate steps - ie: qemu/kvm/and virt manager, /docker/k8s/vs code/, all $PATH:/.bashrc, access dashboards (kubernetes, jupyter labs, strelka) 
+Oracilur Oriole - AMD
+Setup Documentation
 
-Ubuntu 24.10>amd
+# Section 1
+1.1 Docker
+1.2 Kubernetes
 
-Getting started!
+# Section 2
+2.1 PostgreSQL
+2.2 SQL lite
 
-# DOWNLOAD DOCKER
+# Section 3 
+3.1 Terraform
+3.2 Vault
 
+# Section 4
+4.1 Redis
+
+1.1 DOCKER
 modprobe kvm
-modprobe kvm_intel  # Intel processors
-modprobe kvm_amd    # AMD processors
+modprobe kvm_intel                # Intel processors
+modprobe kvm_amd                  # AMD processors
 (qemu/kvm, virsh vmm)
-kvm-ok              # View the diagnostics
-lsmod | grep kvm    # Check if the KVM modules are enabled
-ls -al /dev/kvm     # Check ownership
-sudo usermod -aG kvm $USER # Add your user to group
+kvm-ok                            # View the diagnostics
+lsmod | grep kvm                  # Check if the KVM modules are enabled
+ls -al /dev/kvm                   # Check ownership
+sudo usermod -aG kvm $USER        # Add your user to group
 
 # Add Docker's official GPG key:
 sudo apt-get update
@@ -61,7 +70,7 @@ Client:
 <...>
 
 # Initialize pass by using a gpg key
-gpg --generate-key # Follow the prompts
+gpg --generate-key                                # Follow the prompts
 pass init <your_generated_gpg-id_public_key>
 
 # Launch Docker Desktop:
@@ -88,15 +97,9 @@ docker.withRegistry('https://docker.mycorp.com/') {
 
 
 
-KUBERNETES
-
-Getting started!
 
 
-# DOWNLOAD KUBERNETES
-
-#Install helm
-
+1.2 KUBERNETES
 1. Download the latest release with the command:
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 2.  Checksum
@@ -187,27 +190,3 @@ helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
 # Grafana :3000
 # Prometheus :9090
 # Strelka :9980
-
-# Terraform
-wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt update && sudo apt install terraform 
-
-wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt update && sudo apt install vault
-
-curl --remote-name https://www.hashicorp.com/.well-known/pgp-key.txt
-gpg --import pgp-key.txt
-gpg --sign-key 34365D9472D7468F
-gpg --fingerprint --list-signatures "HashiCorp Security"
-
-
-# Grafana private data source connectors
-https://<user-name>.grafana.net/connections/private-data-source-connections/
-
-// list //
-Docker/Kubernetes        --workers
-PostgreSQL/SQL lite      --DB
-Hashicorp Vault          --Secrets
-Redis                    --Queue 
