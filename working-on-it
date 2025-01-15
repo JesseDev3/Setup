@@ -202,4 +202,4 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashi
 sudo apt update && sudo apt install terraform
 
 # Grafana private data source connectors
-https://<user-name>.grafana.net/connections/private-data-source-connections/ce0ab6f6-df14-485f-8d73-cb368205e58e?tab=configuration_details
+https://<user-name>.grafana.net/connections/private-data-source-connections/
