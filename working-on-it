@@ -2,17 +2,9 @@
 Go through to install all dependencies/binaries/plugins/set $PATH(s):/ core program installs 
 and document seperate steps - ie: qemu/kvm/and virt manager, /docker/k8s/vs code/, all $PATH:/.bashrc, access dashboards (kubernetes, jupyter labs, strelka) 
 
-
-
-
-
 Ubuntu 24.10>amd
 
-
-Docker
-
 Getting started!
-
 
 # DOWNLOAD DOCKER
 
@@ -203,3 +195,11 @@ sudo apt update && sudo apt install terraform
 
 # Grafana private data source connectors
 https://<user-name>.grafana.net/connections/private-data-source-connections/
+
+
+
+// list //
+Docker/Kubernetes        --workers
+PostgreSQL/SQL lite      --DB
+Hashicorp Vault          --Secrets
+Redis                    --Queue 
