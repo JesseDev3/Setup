@@ -1,3 +1,59 @@
+/** Download extension pack **/
+https://www.virtualbox.org/wiki/Downloads
+
+/** Choose download for linux distro **/
+https://www.virtualbox.org/wiki/Linux_Downloads
+
+/** SHA256 checksum **/
+cd/Downloads
+sha256sum virtualbox-<version-filepath>
+sha256sum virtualbox-<ext-filepath>
+
+/** Install using preferred method **/
+
+/** Load kernel module / Configure secure boot **/
+sudo /sbin/vboxconfig
+
+/** Create RSA key pair to sign vboxdrv vboxnetflt vboxnetadp **/
+sudo -i
+# mkdir /root/module-signing
+# cd /root/module-signing
+# openssl req -new -x509 -newkey rsa:2048 -keyout MOK.priv -outform DER -out MOK.der -nodes -days 36500 -subj "/CN=YOUR_NAME/"
+[...]
+# chmod 600 MOK.priv
+
+/** *ROOT, use MOK util to import public key **/
+# mokutil --import /root/module-signing/MOK.der
+
+/** Reboot the machine. When the bootloader starts, the MOK manager EFI utility should automatically start **/
+dmesg|grep 'EFI: Loaded cert'
+
+/** Create script /root/module-signing/sign-vbox-modules **/
+#!/bin/bash
+for modfile in $(dirname $(modinfo -n vboxdrv))/*.ko; do
+echo "Signing $modfile"
+/usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 \
+/root/module-signing/MOK.priv \
+/root/module-signing/MOK.der "$modfile"
+done
+
+# chmod 700 /root/module-signing/sign-vbox-modules
+/** Run the script as root. You will need to run the signing script every time a new kernel update is installed, 
+since this will cause a rebuild of the third party VirtualBox modules. Use the script only after the new kernel 
+has been booted, since it relies on modinfo -n and uname -r to tell which kernel version to sign for **/
+/** Test for use to sign other thid party kernel modules **/
+
+/** Load vboxdrv module and fire up VirtualBox **/
+# modprobe vboxdrv
+/** Install extension manager **/
+ctr+t>Install
+
+/** Can't enumerate usb devices **/
+sudo usermod -a -G vboxusers $USER
+groups $USER
+virtualbox logout
+
+
 DOCKER
 modprobe kvm
 modprobe kvm_intel                # Intel processors
