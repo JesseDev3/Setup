@@ -6,7 +6,7 @@ Setup Documentation
 1.2 Kubernetes
 
 # Section 2
-2.1 PostgreSQL
+2.1 PostgreSQL /n
 2.2 SQL lite
 
 # Section 3 
