@@ -187,6 +187,23 @@ kubeadmConfigPatches:
 
 # Add dashboards to cluster
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
+
+# IT Tools :8080
+docker run -d --name it-tools --restart unless-stopped -p 8080:80 corentinth/it-tools:latest
+
 # Grafana :3000
+sudo systemctl daemon-reload
+sudo systemctl start grafana-server
+sudo systemctl status grafana-server
+sudo systemctl enable grafana-server.service
+
 # Prometheus :9090
-# Strelka :9980
+
+# Strelka :9980/ Jaeger :16686
+/Precompiled/
+docker compose -f build/docker-compose-no-build.yaml up -d && \
+go build github.com/target/strelka/src/go/cmd/strelka-oneshot
+/build and start/
+docker compose -f build/docker-compose.yaml build && \
+docker compose -f build/docker-compose.yaml up -d && \
+go build github.com/target/strelka/src/go/cmd/strelka-oneshot
