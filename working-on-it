@@ -199,7 +199,8 @@ sudo systemctl enable grafana-server.service
 
 # Prometheus :9090
 
-# Strelka :9980/ Jaeger :16686
+# Strelka :9980
+# Jaeger :16686
 /Precompiled/
 docker compose -f build/docker-compose-no-build.yaml up -d && \
 go build github.com/target/strelka/src/go/cmd/strelka-oneshot
